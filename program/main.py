@@ -1,9 +1,12 @@
 import random
+import pygame
 from GameConfig import GameConfig
 
 from player import Player
-from chunk import Chunk
 from map import Map
+
+affichage_pygame = True
+affichage_console = not(affichage_pygame)
 
 #generation du Joueur
 posPlayerX = 2 #coordonée de base du joueur dans le chunk
@@ -13,15 +16,27 @@ coChunkY = 0
 player = Player(posPlayerX,posPlayerY, coChunkX, coChunkY)
 
 #generation de la map
+if affichage_pygame :
+    pygame.init()
+    window = pygame.display.set_mode(
+        (GameConfig.SCREEN_WIDTH, GameConfig.SCREEN_HEIGHT)
+    )
+    pygame.display.set_caption("Mon Jeu 2D en Pygame")
+else :
+    window = 1
 chunk = {}
-map = Map()
+map = Map(window)
 
 GameOver = False
 while not(GameOver) : #commence la partie
     
     map.updateMap(player.coChunkXY[0],player.coChunkXY[1], chunk) #centre la map autour du joueur
-    map.affichage(player)
-    
+
+    if affichage_pygame :
+        map.affichagePygame(player)
+    if affichage_console :
+        map.affichageConsole(player)
+
     ###### joueur interagie ######
     pressed_keys = input("appuie sur une touche : ") #demande une input au joueur
     listPressed_keys = list(pressed_keys)
@@ -33,3 +48,4 @@ while not(GameOver) : #commence la partie
             GameOver = True
             break
         player.update(chunk, listPressed_keys[n])
+    
