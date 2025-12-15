@@ -1,13 +1,15 @@
+import pygame
 import random
 from GameConfig import GameConfig
 
 from chunk import Chunk
 
 class Map :
-    def __init__(self) :
+    def __init__(self,window) :
         self.map = []
+        self.window = window
     
-    def affichage(self, player) :
+    def affichageConsole(self, player) :
         for y in range(int(len(self.map)*(GameConfig.RESOLUTION-1)/2.4),int(len(self.map) - (len(self.map)*(GameConfig.RESOLUTION-1)/2.4))) : #parcours la map pour l AFFICHAGE resolution 10/6
             for x in range(len(self.map[y])) :
                 if (x == player.xy[0]+GameConfig.NBR*GameConfig.CHAMPS_DE_VISION) and (y == player.xy[1]+GameConfig.NBR*GameConfig.CHAMPS_DE_VISION) :
@@ -29,7 +31,63 @@ class Map :
                 else : #texture d erreur
                     print("🟪", end = "")
             print("")
+    
+    def affichagePygame(self, player):
+        # Couleurs
+        BEIGE = (220, 200, 160)
+        VERT_POMME = (0, 255, 0)
+        VERT_FONCE = (0, 150, 0)
+        NOIR = (0, 0, 0)
+        MARRON = (120, 70, 15)
+        ROUGE = (255, 0, 0)
+        ROUGE_FONCE = (150, 0, 0)
+        BLEU = (0, 0, 255)
+        VIOLET = (180, 0, 180)
+
+        # Taille d’une case à l’écran
+        CASE = GameConfig.CASE_SIZE 
+
+        # Efface l’écran
+        self.window.fill((0, 0, 0))
+
+        # Parcours de la map
+        for y in range(int(len(self.map)*(GameConfig.RESOLUTION-1)/2.4), int(len(self.map) - (len(self.map)*(GameConfig.RESOLUTION-1)/2.4))):
+            for x in range(len(self.map[y])):
+                # Couleur de la case
+                val = self.map[y][x]
+
+                if val == 0:
+                    color = VERT_POMME
+                elif val == 1:
+                    color = VERT_FONCE
+                elif val == 2:
+                    color = NOIR
+                elif val == 3:
+                    color = MARRON
+                elif val == 4:
+                    color = ROUGE
+                elif val == 5:
+                    color = ROUGE_FONCE
+                elif val == 6:
+                    color = BLEU
+                else:
+                    color = VIOLET
+
+                # Vérification du joueur
+                if (x == player.xy[0] + GameConfig.NBR * GameConfig.CHAMPS_DE_VISION) and (y == player.xy[1] + GameConfig.NBR * GameConfig.CHAMPS_DE_VISION):
+                    color = BEIGE
+
+                # Calcul position d’affichage 
+                draw_x = (x - (player.xy[0])) * CASE
+                draw_y = (y - (player.xy[1])) * CASE
+
+                # Dessin de la case 
+                pygame.draw.rect(self.window, color,
+                                (draw_x, draw_y, CASE, CASE))
         
+        # Met l’affichage à jour
+        pygame.display.flip()
+
     def updateMap(self, coChunkX,coChunkY, chunk) : #update la map autour du chunk de coordonée (coChunkX,coChunkY)
         self.map = [] #reset la map
         j = - GameConfig.CHAMPS_DE_VISION #co du chunk en haut a gauche cest i j
