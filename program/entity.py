@@ -23,27 +23,27 @@ class Entity :
         newX, newY = self.xy[0], self.xy[1]
         newChunkX, newChunkY = self.coChunkXY[0], self.coChunkXY[1]
         if self.xy[1] == 0 and mvt == "up" : #cas particulier de changement de chunk
-            newY = GameConfig.NBR - 1
+            newY = GameConfig.NBR - GameConfig.speed
             newChunkY += -1
-        elif self.xy[1] == GameConfig.NBR-1 and mvt == "down" :
+        elif self.xy[1] == GameConfig.NBR-GameConfig.speed and mvt == "down" : 
             newY = 0
-            newChunkY += 1
-        elif self.xy[0] == GameConfig.NBR-1 and mvt == "right" :
+            newChunkY += 1 
+        elif self.xy[0] == GameConfig.NBR-GameConfig.speed and mvt == "right" : 
             newX = 0
             newChunkX += 1
         elif self.xy[0] == 0 and mvt == "left" :
-            newX = GameConfig.NBR - 1
+            newX = GameConfig.NBR - GameConfig.speed
             newChunkX += -1
         else : #si il n y a pas de changement de chunk
             if mvt == "up" :
-                newY += -1
+                newY += -GameConfig.speed
             elif mvt == "down" :
-                newY += 1
+                newY += GameConfig.speed
             elif mvt == "right" :
-                newX += 1
+                newX += GameConfig.speed
             else : # mvt == "left" :
-                newX += -1
-        return chunk[str(newChunkX)+ str(newChunkY)].chunk[newY][newX] in GameConfig.FLOOR
+                newX += -GameConfig.speed
+        return chunk[str(newChunkX)+ str(newChunkY)].chunk[int(newY)][int(newX)] in GameConfig.FLOOR
 
 class Object(Entity) :
     def destroy(self) : #laisse ce qu il y a dans son inventaire par terre

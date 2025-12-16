@@ -51,7 +51,7 @@ class Map :
         self.window.fill((0, 0, 0))
 
         # Parcours de la map
-        for y in range(int(len(self.map)*(GameConfig.RESOLUTION-1)/2.4), int(len(self.map) - (len(self.map)*(GameConfig.RESOLUTION-1)/2.4))):
+        for y in range(len(self.map)):
             for x in range(len(self.map[y])):
                 # Couleur de la case
                 val = self.map[y][x]
@@ -74,16 +74,22 @@ class Map :
                     color = VIOLET
 
                 # Vérification du joueur
-                if (x == player.xy[0] + GameConfig.NBR * GameConfig.CHAMPS_DE_VISION) and (y == player.xy[1] + GameConfig.NBR * GameConfig.CHAMPS_DE_VISION):
-                    color = BEIGE
+                """if (x == player.xy[0] + GameConfig.NBR * GameConfig.CHAMPS_DE_VISION) and (y == player.xy[1] + GameConfig.NBR * GameConfig.CHAMPS_DE_VISION):
+                    color = BEIGE"""
 
                 # Calcul position d’affichage 
                 draw_x = (x - (player.xy[0])) * CASE
-                draw_y = (y - (player.xy[1])) * CASE
-
+                draw_y = (y - (player.xy[1])) * CASE - (GameConfig.SCREEN_WIDTH / 4)
+                
                 # Dessin de la case 
                 pygame.draw.rect(self.window, color,
                                 (draw_x, draw_y, CASE, CASE))
+        # Dessin du joueur 
+        center = ((GameConfig.NBR * GameConfig.CHAMPS_DE_VISION) * CASE + CASE/2, (GameConfig.NBR * GameConfig.CHAMPS_DE_VISION) * CASE + CASE/2 - (GameConfig.SCREEN_WIDTH / 4))
+        color = BEIGE
+        pygame.draw.circle(self.window, color, center, CASE/3)
+        """pygame.draw.rect(self.window, color,
+                                (draw_x, draw_y, CASE, CASE))"""
         
         # Met l’affichage à jour
         pygame.display.flip()

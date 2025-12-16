@@ -13,9 +13,18 @@ J’avance pas à pas, en passionné et en rêveur, pleinement conscient que ce 
 ## Objectifs du Projet
 - [X] generer une carte completement aléatoire
 - [X] Intéragir avec l'environnement
-- [ ] Affichage 2D avec Pygame
+- [X] Affichage 2D avec Pygame
+- [ ] Déplacement fluide
+- [ ] Rendre mon code plus lisible et "standard"
+- [ ] Intéragir avec l'environement
 - [ ] Création d'une map cohérente en utilisant des bruits et une seed
+- [ ] Graphisme utilisant les assets
 - [ ] Passer en C++
+
+**D'autre objectif (optionnel pour le moment) :**
+- [ ] Un menu de pause et de start
+- [ ] Sauvegarder la partie du joueur
+- [ ] Option de survie (Craft, utilsation des outils)
 
 ---
 
@@ -94,6 +103,11 @@ mindmap
       bruitage
         realiste
         s accorde avec la musique pour creer une nouvelle musique unique pour le joueur
+    Style Graphique
+      Steam Punk
+      Gothique
+      Moyen age dans l ambiance
+      dessin animé avec grain comme batman the animated series 
 ```
 
 ### 3. Code

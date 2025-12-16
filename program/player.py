@@ -1,9 +1,19 @@
 import random
+import pygame
 from GameConfig import GameConfig
 from entity import Entity
 
 class Player(Entity) :
     def update(self, chunk, pressed_keys) :
+        if pressed_keys[pygame.K_UP] and (self.pasObstacle("up", chunk)) : #deplace en haut
+            self.xy[1] += -GameConfig.speed
+        if pressed_keys[pygame.K_DOWN] and (self.pasObstacle("down", chunk)) : #deplace en bas
+            self.xy[1] += GameConfig.speed
+        if pressed_keys[pygame.K_RIGHT] and (self.pasObstacle("right", chunk)) : #deplace a droite
+            self.xy[0] += GameConfig.speed
+        if pressed_keys[pygame.K_LEFT] and (self.pasObstacle("left", chunk)) : #deplace a gauche
+            self.xy[0] += -GameConfig.speed
+        """ version console
         if (pressed_keys == "z") and (self.pasObstacle("up", chunk)) : #deplace en haut
             self.xy[1] += -1
         elif (pressed_keys == "s") and (self.pasObstacle("down", chunk)) : #deplace en bas
@@ -11,7 +21,7 @@ class Player(Entity) :
         elif (pressed_keys == "d") and (self.pasObstacle("right", chunk)) : #deplace a droite
             self.xy[0] += 1
         elif (pressed_keys == "q") and (self.pasObstacle("left", chunk)) : #deplace a gauche
-            self.xy[0] += -1
+            self.xy[0] += -1"""
         
         ###### si joueur change de chunk ######
         if self.xy[1] < 0 : #haut

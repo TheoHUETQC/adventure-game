@@ -1,4 +1,3 @@
-import random
 import pygame
 from GameConfig import GameConfig
 
@@ -15,21 +14,25 @@ coChunkX = 0 #coordonée du chunk ou se trouve le joueur
 coChunkY = 0
 player = Player(posPlayerX,posPlayerY, coChunkX, coChunkY)
 
-#generation de la map
-if affichage_pygame :
-    pygame.init()
-    window = pygame.display.set_mode(
+#generation de la fenetre pygame
+pygame.init()
+window = pygame.display.set_mode(
         (GameConfig.SCREEN_WIDTH, GameConfig.SCREEN_HEIGHT)
     )
-    pygame.display.set_caption("Mon Jeu 2D en Pygame")
-else :
-    window = 1
+pygame.display.set_caption("2D adventure")
+
+clock = pygame.time.Clock()
+
+#generation de la map
 chunk = {}
 map = Map(window)
 
-GameOver = False
-while not(GameOver) : #commence la partie
-    
+running = True
+while running : #commence la partie
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
     map.updateMap(player.coChunkXY[0],player.coChunkXY[1], chunk) #centre la map autour du joueur
 
     if affichage_pygame :
@@ -38,6 +41,11 @@ while not(GameOver) : #commence la partie
         map.affichageConsole(player)
 
     ###### joueur interagie ######
+    
+    keys = pygame.key.get_pressed()
+    player.update(chunk, keys)
+
+    """ version console
     pressed_keys = input("appuie sur une touche : ") #demande une input au joueur
     listPressed_keys = list(pressed_keys)
     NbrDaction = len(listPressed_keys)
@@ -45,7 +53,10 @@ while not(GameOver) : #commence la partie
         NbrDaction = GameConfig.MAXCOMBO
     for n in range(NbrDaction) : #pour effectuer plusieur action
         if pressed_keys == "a" : #quitte le jeu
-            GameOver = True
+            running = False
             break
-        player.update(chunk, listPressed_keys[n])
+        player.update(chunk, listPressed_keys[n])"""
     
+    clock.tick(60)
+    
+pygame.quit()
