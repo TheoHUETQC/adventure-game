@@ -10,21 +10,37 @@ J’avance pas à pas, en passionné et en rêveur, pleinement conscient que ce 
 
 ---
 
-## Objectifs du Projet
-- [X] generer une carte completement aléatoire
+## Avancement du Projet
+
+**1er étape : Generer une map "infini" et aléatoire**
+- [X] Generer un chunk
+- [X] Generer une carte composé de chunk
+- [X] Afficher les chunks autours du joueur
+- [X] Sauvegarder les chunk generer
+
+**2e étape : Mouvements discretisés**
+- [X] Déplacement de joueur de case en case
+- [X] Generer des nouveaux chunk en fonction des deplacements
+- [X] Gerer les collisions
 - [X] Intéragir avec l'environnement
+- [X] Faire le projet Orienté Objet
+
+**3e étape : Mouvements continues**
 - [X] Affichage 2D avec Pygame
 - [ ] Déplacement fluide
+- [ ] gerer les collisions
 - [ ] Rendre mon code plus lisible et "standard"
 - [ ] Intéragir avec l'environement
+
+**4e étape : vers un jeu "jouable"**
 - [ ] Création d'une map cohérente en utilisant des bruits et une seed
 - [ ] Graphisme utilisant les assets
-- [ ] Passer en C++
-
-**D'autre objectif (optionnel pour le moment) :**
 - [ ] Un menu de pause et de start
 - [ ] Sauvegarder la partie du joueur
 - [ ] Option de survie (Craft, utilsation des outils)
+
+**Objectif important**
+- [ ] Passer en C++
 
 ---
 
@@ -37,35 +53,35 @@ Ces cartes mentales me permettent d’organiser toutes mes idées sans en perdre
 mindmap
   root((Histoire))
     autre
-    point de depart
+    (point de depart)
       méchant presente notre hero comme un fils de dieux capable de sauver le monde pour eviter de detruire le monde
       le dieu est tombé il faut le faire remonter au throne
         faut tuer les boss cest a cause d'eux
       on va mourir au debut et arriver dans le monde du passé, on va pouvoir discuter avec les pnj pour voir qu'il voue un culte au boss qu'on a tué
-    objectif
+    (objectif)
       comprendre que le monde est inversé le méchant ne veux pas le sauver mais le laisser detruit et sans dieux, on l'aide depuis le depart en tuant les boss qui sont les derniers rampart
-      deux choix
+      (deux choix)
         laisser le monde comme ca pour aider le mechant et rester puissant mais laisser tout les habitant dans la detresse de la vie eternelle
           tuer les habitants pour etre le bras droit du méchant et dominer le monde
         aider le monde a revenir comme avant mais disparaitre parce qu il n y a pas de raison de venir
           mourir pour laisser les habitants en vie et vivre comme avant
-    secondaire
-      pnj
+    (secondaire)
+      (pnj)
         opinion : pour avoir leur aide il faut etre du meme opignons
         mémoire : si tu les aides ou aide leur proche il t aideront
         leur vie
           habitude : tout les jours il rentre chez eux..
           travail : permet de les faire deplacer dans la map
           connaissance : il se transmette les infos sur toi et le monde
-    personnage
-      principale
-      méchant
+    (personnage)
+      (principale)
+      (méchant)
         se fait passer pour le gentil quand le héro arrive
         donne pour mission au héro d'aller tuer des boss qui sont gentil
-      dieu
+      (dieu)
         guide le joueur
         donne la "quete"
-      Boss
+      (Boss)
         mourir ne refait pas recommencer, tu es réanimé par le boss par exemple
         tu ne vas pas tué le boss final, tu finis par l'épargné parce qu il faut jouer avec les émotions du joueur, tu l'as detester pour finalement le laisser
         les bosses sont inofensif au depart, ils paraissent gentil ce qui fait douter le joueur, ref :shadow of colossus
@@ -77,13 +93,13 @@ mindmap
 mindmap
   root((Artistique))
     autre
-    couleur : change en fonction de l ambiance
+    (couleur : change en fonction de l ambiance)
       triste : bleu
       degout : vert
       joie : jaune orange
       rouge : enervement
-    camera
-      plan
+    (camera)
+      (plan)
         oblige le joueur a regarder certain detail
           exemple fumé ou brouillard pour obliger le joueur a regarder le ciel
           exemple couloir ou quand on sort on regarde devant
@@ -91,19 +107,19 @@ mindmap
       vu 3eme personne
         plus de liberté pour les plans
         bien pour les combats et le realisme
-    lumiere
+    (lumiere)
       ilumine les objets et zone importante
-    guidage du joueur
+    (guidage du joueur)
       terrain et objet de certaine couleur
       lumiere pour guider
       deplacement et mouvement, exemple un mec qui fuit le danger, indique la direction a prendre vu qu il vient du danger
-    son
-      musique
+    (son)
+      (musique)
         change en fonction des actions du joueur et de l environement
-      bruitage
+      (bruitage)
         realiste
         s accorde avec la musique pour creer une nouvelle musique unique pour le joueur
-    Style Graphique
+    (Style Graphique)
       Steam Punk
       Gothique
       Moyen age dans l ambiance
@@ -115,53 +131,54 @@ mindmap
 mindmap
   root((Code))
     autre
-    entité
+    (entité)
       Joueur
       Monstre
       Arbre
         peuvent etre detruit pour faire du bois
       Coffre
         permet de recuperer des items
-    monde
-      present
+    (monde)
+      (present)
         dieux est tombé sur cette plaine, monde en ruine
         les habitants et etre vivants sont des demons
-      passé/monde de la mort
+      (passé/monde de la mort)
         on arrive ici lorsque l'on "meurt" dans le jeu, ici on ne peut pas mourir, tout est inofensif
         reviens avant le desastre les habitants sont normaux
         ici que le joueur peut reparer le monde
-    monde procédural
-      chunk
+    (monde procédural)
+      (chunk)
         défini par la seed, le bruit
         chargé quand le joueur est proche
-      monde generer aleatoirement
+      (monde generer aleatoirement)
         mais delimiterpar une map precise
           entouré de montagne au nord ouest et mer au sud est
           ville et lieux dit obligatoire
           riviere avec des ponts a reparer qui traverse la map de nord ouest a sud est
-        seed
-    item
-      ressource (pour reparer et craft)
+        (seed)
+    (item)
+      (ressource)
+        pour reparer et craft
         bois
         pierre
-      outil
+      (outil)
         hache
         épée
         pioche
-      objet magique
+      (objet magique)
         montre a gousset
           permet de passer dans l autre monde : passé ou present
             permet desquiver des ennemies ou modifier un chemain et que ca deviene pratiquable, comme titanfall
           en changeant de monde on a notre nous du passé, il y a 10sec, qu on voit
             peut etre utile pour affronter des mob ou se faire la courte echelle ou deplacer lourd objet a deux
-    mécanique
-      survie
+    (mécanique)
+      (survie)
         couper arbre
         fouiller coffre
         craft
-      combat
+      (combat)
         systeme d'épée comme chivalry
-      changer de monde
+      (changer de monde)
 
 ```
 
