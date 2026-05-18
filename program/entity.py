@@ -43,6 +43,18 @@ class Entity :
                 newX += GameConfig.speed
             else : # mvt == "left" :
                 newX += -GameConfig.speed
+        if newY < 0 :
+            newY = GameConfig.NBR - GameConfig.speed
+            newChunkY += -1
+        if newY >= GameConfig.NBR :
+            newY = 0
+            newChunkY += 1
+        if newX < 0 :
+            newX = GameConfig.NBR - GameConfig.speed
+            newChunkX += -1
+        if newX >= GameConfig.NBR :
+            newX = 0
+            newChunkX += 1
         return chunk[str(newChunkX)+ str(newChunkY)].chunk[int(newY)][int(newX)] in GameConfig.FLOOR
 
 class Object(Entity) :

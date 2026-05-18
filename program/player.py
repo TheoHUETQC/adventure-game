@@ -25,16 +25,16 @@ class Player(Entity) :
         
         ###### si joueur change de chunk ######
         if self.xy[1] < 0 : #haut
-            self.xy[1] = GameConfig.NBR - 1
+            self.xy[1] = GameConfig.NBR - GameConfig.speed
             self.coChunkXY[1] += -1
-        elif self.xy[1] >= GameConfig.NBR : #bas
+        if self.xy[1] >= GameConfig.NBR : #bas
             self.xy[1] = 0
             self.coChunkXY[1] += 1
-        elif self.xy[0] >= GameConfig.NBR : #droite
+        if self.xy[0] >= GameConfig.NBR : #droite
             self.xy[0] = 0
             self.coChunkXY[0] += 1
-        elif self.xy[0] < 0 : #gauche
-            self.xy[0] = GameConfig.NBR - 1
+        if self.xy[0] < 0 : #gauche
+            self.xy[0] = GameConfig.NBR - GameConfig.speed
             self.coChunkXY[0] += -1
         
         if pressed_keys[pygame.K_e] : #interagie

@@ -8,7 +8,7 @@ class GameConfig :
 		self.FLOOR = [0, 3] #les cases sur les quels le joueur peut marcher
 		self.SEED = 156
 
-		self.speed = 0.5
+		self.speed = 0.2
   
 	###### parametre du jeu ######
 		self.CHAMPS_DE_VISION = 3 #nombre de chunk qu on voit autour de nous (entier)        

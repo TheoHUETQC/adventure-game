@@ -27,8 +27,8 @@ J’avance pas à pas, en passionné et en rêveur, pleinement conscient que ce 
 
 **3e étape : Mouvements continues**
 - [X] Affichage 2D avec Pygame
-- [ ] Déplacement fluide
-- [ ] gerer les collisions
+- [X] Déplacement fluide
+- [X] gerer les collisions
 - [ ] Rendre mon code plus lisible et "standard"
 - [ ] Intéragir avec l'environement
 

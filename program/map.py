@@ -78,8 +78,8 @@ class Map :
                     color = BEIGE"""
 
                 # Calcul position d’affichage 
-                draw_x = (x - (player.xy[0])) * CASE
-                draw_y = (y - (player.xy[1])) * CASE - (GameConfig.SCREEN_WIDTH / 4)
+                draw_x = (x - (player.xy[0])+0.5) * CASE
+                draw_y = (y - (player.xy[1])+0.5) * CASE - (GameConfig.SCREEN_WIDTH / 4)
                 
                 # Dessin de la case 
                 pygame.draw.rect(self.window, color,
