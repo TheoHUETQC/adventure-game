@@ -42,13 +42,13 @@ class Player(Entity) :
                 for y in range(-1,2) : #regarde les alentours du joueur
                     for x in range(-1,2) :
                         [i,j] = self.co_chunk([self.xy[0]+x, self.xy[1]+y]) #permet de connaitre le chunk ou se trouve la modification
-                        if chunk[str(self.coChunkXY[0] + i)+str(self.coChunkXY[1] + j)].chunk[(self.xy[1]+y) - GameConfig.NBR*(j+1)][(self.xy[0]+x) - GameConfig.NBR*(i+1)] == 4 : #verifie si il y a un coffre                            
+                        if chunk[str(self.coChunkXY[0] + i)+str(self.coChunkXY[1] + j)].chunk[int((self.xy[1]+y) - GameConfig.NBR*(j+1))][int((self.xy[0]+x) - GameConfig.NBR*(i+1))] == 4 : #verifie si il y a un coffre                            
                             self.inventory.append(GameConfig.ITEM[int(random.randint(0, GameConfig.NBRDITEM-1))]) #ajoute l item dans l inventaire
-                            chunk[str(self.coChunkXY[0] + i)+str(self.coChunkXY[1] + j)].chunk[(self.xy[1]+y) - GameConfig.NBR*(j+1)][(self.xy[0]+x) - GameConfig.NBR*(i+1)] = 3 #retire le coffre
+                            chunk[str(self.coChunkXY[0] + i)+str(self.coChunkXY[1] + j)].chunk[int((self.xy[1]+y) - GameConfig.NBR*(j+1))][int((self.xy[0]+x) - GameConfig.NBR*(i+1))] = 3 #retire le coffre
                             break
-                        elif chunk[str(self.coChunkXY[0] + i)+str(self.coChunkXY[1] + j)].chunk[(self.xy[1]+y) - GameConfig.NBR*(j+1)][(self.xy[0]+x) - GameConfig.NBR*(i+1)] == 1 : #verifie si il y a un arbre 
+                        elif chunk[str(self.coChunkXY[0] + i)+str(self.coChunkXY[1] + j)].chunk[int((self.xy[1]+y) - GameConfig.NBR*(j+1))][int((self.xy[0]+x) - GameConfig.NBR*(i+1))] == 1 : #verifie si il y a un arbre 
                             self.inventory.append("bois") #ajoute l item dans l inventaire 
-                            chunk[str(self.coChunkXY[0] + i)+str(self.coChunkXY[1] + j)].chunk[(self.xy[1]+y) - GameConfig.NBR*(j+1)][(self.xy[0]+x) - GameConfig.NBR*(i+1)] = 0 #retire l'arbre
+                            chunk[str(self.coChunkXY[0] + i)+str(self.coChunkXY[1] + j)].chunk[int((self.xy[1]+y) - GameConfig.NBR*(j+1))][int((self.xy[0]+x) - GameConfig.NBR*(i+1))] = 0 #retire l'arbre
                             break
                     else :
                         continue

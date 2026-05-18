@@ -9,13 +9,13 @@ class Entity :
     
     def co_chunk(self, xy) : #donne les coordonné du chunk ou se trouve la case xy 
         i, j = 0 , 0
-        if (xy[0] <= 4) :
+        if (xy[0] < 0) :
             i = -1
-        elif (xy[0] >= 10) :
+        elif (xy[0] >= GameConfig.NBR) :
             i = 1
-        if (xy[1] <= 4) :
+        if (xy[1] < 0) :
             j = -1
-        elif (xy[1] >= 10) :
+        elif (xy[1] >= GameConfig.NBR) :
             j = 1
         return [i,j]
              
