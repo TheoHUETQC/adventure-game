@@ -37,7 +37,7 @@ class Player(Entity) :
             self.xy[0] = GameConfig.NBR - 1
             self.coChunkXY[0] += -1
         
-        if pressed_keys == "e" : #interagie
+        if pressed_keys[pygame.K_e] : #interagie
             if len(chunk[str(self.coChunkXY[0]) + str(self.coChunkXY[1])].entityIn) != 0 : #verifie qu il y est des entités dans le chunk du joueur  
                 for y in range(-1,2) : #regarde les alentours du joueur
                     for x in range(-1,2) :
@@ -53,7 +53,7 @@ class Player(Entity) :
                     else :
                         continue
                     break
-        elif pressed_keys == "f" : #donne coordonné du joueur
+        elif pressed_keys[pygame.K_f] : #donne coordonné du joueur
             print(f"vous etes en x = {self.coChunkXY[0]*GameConfig.NBR + self.xy[0]}, y = {self.coChunkXY[1]*GameConfig.NBR + self.xy[1]} dans le chunk {self.coChunkXY} en {self.xy}")
-        elif pressed_keys == "i" : #ouvre l invetaire
+        elif pressed_keys[pygame.K_i] : #ouvre l invetaire
             print(self.inventory)
