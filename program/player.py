@@ -39,16 +39,22 @@ class Player(Entity) :
         
         if pressed_keys[pygame.K_e] : #interagie
             if len(chunk[str(self.coChunkXY[0]) + str(self.coChunkXY[1])].entityIn) != 0 : #verifie qu il y est des entités dans le chunk du joueur  
+                print(f"--- xy={[self.coChunkXY[0]*GameConfig.NBR + self.xy[0], self.coChunkXY[1]*GameConfig.NBR + self.xy[1]]}, chunk={self.coChunkXY}")
                 for y in range(-1,2) : #regarde les alentours du joueur
                     for x in range(-1,2) :
-                        [i,j] = self.co_chunk([self.xy[0]+x, self.xy[1]+y]) #permet de connaitre le chunk ou se trouve la modification
-                        if chunk[str(self.coChunkXY[0] + i)+str(self.coChunkXY[1] + j)].chunk[int((self.xy[1]+y) - GameConfig.NBR*(j+1))][int((self.xy[0]+x) - GameConfig.NBR*(i+1))] == 4 : #verifie si il y a un coffre                            
+                        x_around = self.coChunkXY[0]*GameConfig.NBR + self.xy[0]+x
+                        y_around = self.coChunkXY[1]*GameConfig.NBR + self.xy[1]+y
+                        [i,j] = self.co_chunk([x_around, y_around]) #permet de connaitre le chunk ou se trouve la modification
+                        print(i,",",j)
+                        x_in_chunk = int((x_around))%(GameConfig.NBR)
+                        y_in_chunk = int((y_around))%(GameConfig.NBR)
+                        if chunk[str(i)+str(j)].chunk[x_in_chunk][y_in_chunk] == 4 : #verifie si il y a un coffre                            
                             self.inventory.append(GameConfig.ITEM[int(random.randint(0, GameConfig.NBRDITEM-1))]) #ajoute l item dans l inventaire
-                            chunk[str(self.coChunkXY[0] + i)+str(self.coChunkXY[1] + j)].chunk[int((self.xy[1]+y) - GameConfig.NBR*(j+1))][int((self.xy[0]+x) - GameConfig.NBR*(i+1))] = 3 #retire le coffre
+                            chunk[str(i)+str(j)].chunk[x_in_chunk][y_in_chunk] = 3 #retire le coffre
                             break
-                        elif chunk[str(self.coChunkXY[0] + i)+str(self.coChunkXY[1] + j)].chunk[int((self.xy[1]+y) - GameConfig.NBR*(j+1))][int((self.xy[0]+x) - GameConfig.NBR*(i+1))] == 1 : #verifie si il y a un arbre 
+                        elif chunk[str(i)+str(j)].chunk[x_in_chunk][y_in_chunk] == 1 : #verifie si il y a un arbre 
                             self.inventory.append("bois") #ajoute l item dans l inventaire 
-                            chunk[str(self.coChunkXY[0] + i)+str(self.coChunkXY[1] + j)].chunk[int((self.xy[1]+y) - GameConfig.NBR*(j+1))][int((self.xy[0]+x) - GameConfig.NBR*(i+1))] = 0 #retire l'arbre
+                            chunk[str(i)+str(j)].chunk[x_in_chunk][y_in_chunk] = 0 #retire l'arbre
                             break
                     else :
                         continue

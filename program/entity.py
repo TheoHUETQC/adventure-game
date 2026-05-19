@@ -8,18 +8,17 @@ class Entity :
         self.inventory = []
     
     def co_chunk(self, xy) : #donne les coordonné du chunk ou se trouve la case xy 
-        i, j = 0 , 0
-        if (xy[0] < 0) :
-            i = -1
-        elif (xy[0] >= GameConfig.NBR) :
-            i = 1
-        if (xy[1] < 0) :
-            j = -1
-        elif (xy[1] >= GameConfig.NBR) :
-            j = 1
-        return [i,j]
+        x, y = xy[0], xy[1]
+
+        x_in_chunk = x%(GameConfig.NBR)
+        chunk_x = (x - x_in_chunk)//GameConfig.NBR
+
+        y_in_chunk = y%(GameConfig.NBR)
+        chunk_y = (y - y_in_chunk)//GameConfig.NBR
+        print(f"x, y={xy}, chunk={[int(chunk_x), int(chunk_y)]}")
+        return [int(chunk_x), int(chunk_y)]
              
-    def pasObstacle(self, mvt, chunk) : # renvoie True si la case ou l'entité veut se deplacer est un sol
+    def pasObstacle(self, mvt, chunk) : # renvoie True si la case où l'entité veut se deplacer est un sol
         newX, newY = self.xy[0], self.xy[1]
         newChunkX, newChunkY = self.coChunkXY[0], self.coChunkXY[1]
         if self.xy[1] == 0 and mvt == "up" : #cas particulier de changement de chunk
